@@ -40,6 +40,15 @@ main div#anzu-chan {
   z-index: 1;
 }
 
+main p#description {
+  font-size: 3rem;
+  position: absolute;
+  top: calc((100% - 130px) / 2 + 100px / 2 - 40px);
+  left: calc(100% / 2 - 700px / 2 + 15px);
+  font-family: 'MapleStoryLight';
+  font-weight: bold;
+}
+
 main div#result-box {
   position: absolute;
   top: calc((100% - 130px) / 2 + 100px / 2);
@@ -50,15 +59,6 @@ main div#result-box {
   height: 100px;
   padding: 10px;
   overflow-x: auto;
-}
-
-main div#result-box p#description {
-  font-size: 3rem;
-  position: absolute;
-  top: -40px;
-  left: 15px;
-  font-family: 'MapleStoryLight';
-  font-weight: bold;
 }
 
 main div#result-box p#result-text {

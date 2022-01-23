@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title=title
+    link(rel='stylesheet', type="text/css" href='/views/index.css')
+  body
+    main
+      div(id='anzu-chan')
+      div(id='result-box')
+        p(id='description') rotated result
+        p(id='result-text')=gulja
+    div(id='source')
+      p(id='source-description') sources of picture and font are as follows:
+      p anzu picture: 
+        a(href='https://wiki.dcinside.com/wiki/%ED%8C%8C%EC%9D%BC:%EC%95%88%EC%A6%88_%EB%B9%BC%EA%BC%BC.png') https://wiki.dcinside.com/wiki/%ED%8C%8C%EC%9D%BC:%EC%95%88%EC%A6%88_%EB%B9%BC%EA%BC%BC.png
+      p MapleStory font: 
+        a(href='https://maplestory.nexon.com/Media/Font') https://maplestory.nexon.com/Media/Font
+    footer
+      p Original project: 
+        a(href='https://github.com/numgle/Numgle-csharp') https://github.com/numgle/Numgle-csharp

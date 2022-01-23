@@ -1,0 +1,25 @@
+{
+  "name": "numgle-js",
+  "version": "1.0.0",
+  "description": "Vanilla JS implementation version of Numgle",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/numgle/Numgle-JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/numgle/Numgle-JS/issues"
+  },
+  "homepage": "https://github.com/numgle/Numgle-JS#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "pug": "^3.0.2"
+  }
+}

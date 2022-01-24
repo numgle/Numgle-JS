@@ -1,6 +1,12 @@
 # Numgle-JS
 넘글의 바닐라 자바스크립트 구현 버전
 
+# 구축
+```
+npm install
+npm start
+```
+
 # 사용법
 검색창에 오른쪽으로 90도 회전시키고 싶은 단어를 입력
 
@@ -12,6 +18,12 @@
 
 # Numgle-JS
 Vanilla JS implementation version of Numgle
+
+# Build
+```
+npm install
+npm start
+```
 
 # How to use
 Type words you want to rotate 90 deg to right in the search bar

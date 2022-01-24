@@ -17,6 +17,18 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/public/views'));
 app.set('view engine', 'pug');
 
+// router for /getridofsheepduck
+app.get('/getridofsheepduck', (req, res) => {
+  res.send('주소창에 "/굴리고 싶으신 글자" 를 입력해 주세요!');
+});
+
+// router for /getridofsheepduck/:gulja
+app.get('/getridofsheepduck/:gulja', (req, res) => {
+  const numgled = numgle(req.params.gulja);
+
+  res.send(numgled);
+});
+
 // router for /
 app.get('/', (req, res) => {
   res.render('index', { 

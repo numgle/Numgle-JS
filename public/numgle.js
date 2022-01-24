@@ -131,7 +131,6 @@ function isInData(cho_num, jung_num, jong_num) {
 }
 
 function getLetterType(letter) {
-  console.log(letter);
   if (letter === '' || letter === '\r' || letter === '\n') return LETTER_TYPE.empty;
   else if (letter >= 44032 && letter <= 55203) return LETTER_TYPE.completeHangul;
   else if (letter >= 0x3131 && letter <= 0x3163) return LETTER_TYPE.notCompleteHangul;

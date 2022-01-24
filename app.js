@@ -25,8 +25,9 @@ app.get('/getridofsheepduck', (req, res) => {
 // router for /getridofsheepduck/:gulja
 app.get('/getridofsheepduck/:gulja', (req, res) => {
   const numgled = numgle(req.params.gulja);
+  const modified = numgled.replace(' ', '<br>');
 
-  res.send(numgled);
+  res.send(modified);
 });
 
 // router for /

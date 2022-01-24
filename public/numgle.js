@@ -71,7 +71,7 @@ function convertStringToNumgle(input) {
     arr[i] = convertCharToNumgle(input[i]);
   }
 
-  const output = arr.join('<br>');
+  const output = arr.join(' ');
 
   return output;
 }

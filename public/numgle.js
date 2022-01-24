@@ -25,7 +25,30 @@ const data = {
   "englishUpper": ["ᗆ", "ϖ", "∩", "ᗜ", "m", "ㄲ", "ᘏ", "工", "ㅡ", "(__", "ㅈ", "┌-", "ᕒ", "Z", "O", "‾ᗜ", ",O", "7ᗜ", "∽", "-ㅓ", "⊂", "<", "ε", "X", "-<", "N"],
   "englishLower": ["ჹ", "ᓂ", "ᴒ", "ᓇ", "ര", "Ⴕ", "ڡ", "ፓ", "-·", "ㄴ.", "ㅈ", "ㅡ", "ᴟ", "ᴝ", "o", "ᓀ", "ᓄ", "ㄱ", "ᔥ", "-+", "ㄷ", "<", "ꗨ", "x", "ﻋ", "ᴺ"],
   "number": ["o", "ㅡ", "ru", "ω", "-F", "UT", "0‾‾", "__|", "∞", "__0"],
-  "special": ["·-J", "·ㅡ", ".", ">", "ㅣ"]
+  "special": ["·-J", "·ㅡ", ".", ">", "ㅣ"],
+  "range": {
+    "completeHangul": {
+      "start": 44032,
+      "end": 55203
+    },
+    "notCompleteHangul": {
+      "start": 12593,
+      "end": 12643
+    },
+    "uppercase": {
+      "start": 65,
+      "end": 90
+    },
+    "lowercase": {
+      "start": 97,
+      "end": 122
+    },
+    "number": {
+      "start": 48,
+      "end": 57
+    },
+    "special": [63, 33, 46, 94, 45]
+  }
 }
 
 const LETTER_TYPE = {
@@ -44,12 +67,11 @@ function convertStringToNumgle(input) {
 
   const arr = [];
 
-  // modification: from left → right to right → left. Ex) ㅁ「工 rulJ (now) => rulJ ㅁ「工 (modified)
   for (let i = 0; i < input.length; i++) {
-    arr[input.length - 1 - i] = convertCharToNumgle(input[i]);
+    arr[i] = convertCharToNumgle(input[i]);
   }
 
-  const output = arr.join('\n');
+  const output = arr.join('<br>');
 
   return output;
 }
@@ -57,6 +79,7 @@ function convertStringToNumgle(input) {
 function convertCharToNumgle(input) {
   const i = input.charCodeAt(0);
   const letterType = getLetterType(i);
+  let start;
   let result;
 
   switch (letterType) {
@@ -69,23 +92,27 @@ function convertCharToNumgle(input) {
       break;
 
     case LETTER_TYPE.notCompleteHangul:
-      result = data.han[i - 0x3131];
+      start = data.range.notCompleteHangul.start;
+      result = data.han[i - start];
       break;
 
     case LETTER_TYPE.englishUpper:
-      result = data.englishUpper[i - 65];
+      start = data.range.uppercase.start;
+      result = data.englishUpper[i - start];
       break;
 
     case LETTER_TYPE.englishLower:
-      result = data.englishLower[i - 97];
+      start = data.range.lowercase.start;
+      result = data.englishLower[i - start];
       break;
 
     case LETTER_TYPE.number:
-      result = data.number[i - 48];
+      start = data.range.number.start;
+      result = data.number[i - start];
       break;
 
     case LETTER_TYPE.specialLetter:
-      result = data.special['?!.^-'.indexOf(input)];
+      result = data.special[data.range.special.indexOf(i)];
       break;
 
     case LETTER_TYPE.unknown:
@@ -130,13 +157,15 @@ function isInData(cho_num, jung_num, jong_num) {
   else return data.cj[Math.min(8, jung_num), cho_num] !== '';
 }
 
-function getLetterType(letter) {
-  if (letter === '' || letter === '\r' || letter === '\n') return LETTER_TYPE.empty;
-  else if (letter >= 44032 && letter <= 55203) return LETTER_TYPE.completeHangul;
-  else if (letter >= 0x3131 && letter <= 0x3163) return LETTER_TYPE.notCompleteHangul;
-  else if (letter >= 65 && letter <= 90) return LETTER_TYPE.englishUpper;
-  else if (letter >= 97 && letter <= 122) return LETTER_TYPE.englishLower;
-  else if (letter >= 48 && letter <= 57) return LETTER_TYPE.number;
-  else if ([63, 33, 46, 94, 45].filter((l) => l === letter)) return LETTER_TYPE.specialLetter;
+function getLetterType(code) {
+  const dr = data.range;
+
+  if (code === '' || code === '\r' || code === '\n') return LETTER_TYPE.empty;
+  else if (code >= dr.completeHangul.start && code <= dr.completeHangul.end) return LETTER_TYPE.completeHangul;
+  else if (code >= dr.notCompleteHangul.start && code <= dr.notCompleteHangul.end) return LETTER_TYPE.notCompleteHangul;
+  else if (code >= dr.uppercase.start && code <= dr.uppercase.end) return LETTER_TYPE.englishUpper;
+  else if (code >= dr.lowercase.start && code <= dr.lowercase.end) return LETTER_TYPE.englishLower;
+  else if (code >= dr.number.start && code <= dr.number.end) return LETTER_TYPE.number;
+  else if (dr.special.indexOf(code)) return LETTER_TYPE.specialLetter;
   else return LETTER_TYPE.unknown;
 }

@@ -131,12 +131,13 @@ function isInData(cho_num, jung_num, jong_num) {
 }
 
 function getLetterType(letter) {
+  console.log(letter);
   if (letter === '' || letter === '\r' || letter === '\n') return LETTER_TYPE.empty;
   else if (letter >= 44032 && letter <= 55203) return LETTER_TYPE.completeHangul;
   else if (letter >= 0x3131 && letter <= 0x3163) return LETTER_TYPE.notCompleteHangul;
   else if (letter >= 65 && letter <= 90) return LETTER_TYPE.englishUpper;
   else if (letter >= 97 && letter <= 122) return LETTER_TYPE.englishLower;
   else if (letter >= 48 && letter <= 57) return LETTER_TYPE.number;
-  else if ("?!.^-".includes(letter)) return LETTER_TYPE.specialLetter;
+  else if ([63, 33, 46, 94, 45].filter((l) => l === letter)) return LETTER_TYPE.specialLetter;
   else return LETTER_TYPE.unknown;
 }
